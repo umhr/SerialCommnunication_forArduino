@@ -87,6 +87,7 @@ namespace SerialCommnunication_CSharp
         {
             String text = messageTextBox.Text;
             serialPort1.Write(text);
+            logTextBox.AppendText("Write : " + text + "\n");
             //Console.WriteLine(text);
             // messageTextBoxをクリア
             messageTextBox.Text = "";
@@ -114,7 +115,7 @@ namespace SerialCommnunication_CSharp
         {
             if (data != null)
             {
-                logTextBox.AppendText(data + "\n");
+                logTextBox.AppendText("Read : " + data + "\n");
             }
         }
 

@@ -49,7 +49,7 @@
             // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(12, 52);
+            this.messageTextBox.Location = new System.Drawing.Point(12, 231);
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.Size = new System.Drawing.Size(180, 19);
             this.messageTextBox.TabIndex = 8;
@@ -57,7 +57,7 @@
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(198, 48);
+            this.writeButton.Location = new System.Drawing.Point(198, 227);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(75, 23);
             this.writeButton.TabIndex = 7;
@@ -67,7 +67,7 @@
             // 
             // logTextBox
             // 
-            this.logTextBox.Location = new System.Drawing.Point(12, 86);
+            this.logTextBox.Location = new System.Drawing.Point(12, 55);
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
