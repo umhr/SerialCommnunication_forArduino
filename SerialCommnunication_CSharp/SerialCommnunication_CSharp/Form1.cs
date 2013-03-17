@@ -95,6 +95,8 @@ namespace SerialCommnunication_CSharp
         /****************************************************************************/
         /*!
          * serialPort1でデータを受信すると実行されます。
+         * スレッドが異なるので、Invokeを使う。
+         * http://kana-soft.com/tech/sample_0007_4.htm
          */
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
