@@ -64,7 +64,7 @@ namespace SerialCommnunication_CSharp
         private void serialPortOpen()
         {
             string portName = portselectComboBox.SelectedItem.ToString();
-            serialPort1.BaudRate = 9600;
+            serialPort1.BaudRate = int.Parse(bauRateComboBox.Text);//9600;
             serialPort1.PortName = portName;
             serialPort1.Open();
             writeButton.Enabled = true;

@@ -36,6 +36,8 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.openButton = new System.Windows.Forms.Button();
             this.portselectComboBox = new System.Windows.Forms.ComboBox();
+            this.bauRateComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -67,12 +69,12 @@
             // 
             // logTextBox
             // 
-            this.logTextBox.Location = new System.Drawing.Point(12, 55);
+            this.logTextBox.Location = new System.Drawing.Point(12, 64);
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logTextBox.Size = new System.Drawing.Size(260, 166);
+            this.logTextBox.Size = new System.Drawing.Size(260, 157);
             this.logTextBox.TabIndex = 6;
             // 
             // serialPort1
@@ -98,11 +100,43 @@
             this.portselectComboBox.Size = new System.Drawing.Size(121, 20);
             this.portselectComboBox.TabIndex = 10;
             // 
+            // bauRateComboBox
+            // 
+            this.bauRateComboBox.FormattingEnabled = true;
+            this.bauRateComboBox.Items.AddRange(new object[] {
+            "300",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "19200",
+            "28800",
+            "38400",
+            "57600",
+            "115200"});
+            this.bauRateComboBox.Location = new System.Drawing.Point(71, 38);
+            this.bauRateComboBox.Name = "bauRateComboBox";
+            this.bauRateComboBox.Size = new System.Drawing.Size(121, 20);
+            this.bauRateComboBox.TabIndex = 28;
+            this.bauRateComboBox.Text = "9600";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 12);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "BaudRate:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.bauRateComboBox);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.messageTextBox);
             this.Controls.Add(this.writeButton);
@@ -126,6 +160,8 @@
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.ComboBox portselectComboBox;
+        private System.Windows.Forms.ComboBox bauRateComboBox;
+        private System.Windows.Forms.Label label4;
     }
 }
 
