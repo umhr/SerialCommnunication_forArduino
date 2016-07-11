@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace SerialCommnunication_CSharp
 {
@@ -31,12 +24,15 @@ namespace SerialCommnunication_CSharp
         {
             foreach (var portName in SerialPort.GetPortNames())
             {
-                portselectComboBox.Items.Add(portName);
+                portselectComboBox1.Items.Add(portName);
+                portselectComboBox2.Items.Add(portName);
             }
-            if (portselectComboBox.Items.Count > 0)
+            if (portselectComboBox1.Items.Count > 0)
             {
-                portselectComboBox.SelectedIndex = 0;
-                openButton.Enabled = true;
+                portselectComboBox1.SelectedIndex = 0;
+                portselectComboBox2.SelectedIndex = 0;
+                openButton1.Enabled = true;
+                openButton2.Enabled = true;
             }
         }
         /****************************************************************************/
@@ -46,15 +42,15 @@ namespace SerialCommnunication_CSharp
          */
         private void openButton_Click(object sender, EventArgs e)
         {
-            if (openButton.Text == "Open")
+            if (openButton1.Text == "Open")
             {
                 serialPortOpen();
-                openButton.Text = "Close";
+                openButton1.Text = "Close";
             }
             else
             {
                 serialPortClose();
-                openButton.Text = "Open";
+                openButton1.Text = "Open";
             }
         }
         /****************************************************************************/
@@ -63,11 +59,12 @@ namespace SerialCommnunication_CSharp
          */
         private void serialPortOpen()
         {
-            string portName = portselectComboBox.SelectedItem.ToString();
-            serialPort1.BaudRate = int.Parse(bauRateComboBox.Text);//9600;
+            string portName = portselectComboBox1.SelectedItem.ToString();
+            serialPort1.BaudRate = int.Parse(bauRateComboBox1.Text);//9600;
             serialPort1.PortName = portName;
+            serialPort1.DtrEnable = useDTRcheckBox1.Enabled;
             serialPort1.Open();
-            writeButton.Enabled = true;
+            writeButton1.Enabled = true;
         }
         /****************************************************************************/
         /*!
@@ -76,7 +73,7 @@ namespace SerialCommnunication_CSharp
         private void serialPortClose()
         {
             serialPort1.Close();
-            writeButton.Enabled = false;
+            writeButton1.Enabled = false;
         }
         /****************************************************************************/
         /*!
@@ -85,12 +82,12 @@ namespace SerialCommnunication_CSharp
          */
         private void writeButton_Click(object sender, EventArgs e)
         {
-            String text = messageTextBox.Text;
+            String text = messageTextBox1.Text;
             serialPort1.Write(text);
-            logTextBox.AppendText("Write : " + text + "\n");
+            logTextBox1.AppendText("Write : " + text + "\n");
             //Console.WriteLine(text);
             // messageTextBoxをクリア
-            messageTextBox.Text = "";
+            messageTextBox1.Text = "";
         }
 
         /****************************************************************************/
@@ -115,7 +112,7 @@ namespace SerialCommnunication_CSharp
         {
             if (data != null)
             {
-                logTextBox.AppendText("Read : " + data + "\n");
+                logTextBox1.AppendText("Read : " + data + "\n");
             }
         }
 
@@ -132,5 +129,59 @@ namespace SerialCommnunication_CSharp
             }
         }
 
+        private void openButton2_Click(object sender, EventArgs e)
+        {
+            if (openButton2.Text == "Open")
+            {
+                serialPortOpen2();
+                openButton2.Text = "Close";
+            }
+            else
+            {
+                serialPortClose2();
+                openButton2.Text = "Open";
+            }
+
+        }
+
+        private void serialPort2_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+           string data = serialPort2.ReadLine();
+            // 異なるスレッドのテキストボックスに書き込む
+            Invoke(new Delegate_write(write2), new Object[] { data });
+
+        }
+        private void serialPortOpen2()
+        {
+            string portName = portselectComboBox2.SelectedItem.ToString();
+            serialPort2.BaudRate = int.Parse(bauRateComboBox2.Text);//9600;
+            serialPort2.PortName = portName;
+            serialPort2.DtrEnable = useDTRcheckBox2.Enabled;
+            serialPort2.Open();
+            writeButton2.Enabled = true;
+        }
+        private void serialPortClose2()
+        {
+            serialPort2.Close();
+            writeButton2.Enabled = false;
+        }
+        private void write2(string data)
+        {
+            if (data != null)
+            {
+                logTextBox2.AppendText("Read : " + data + "\n");
+            }
+        }
+
+        private void writeButton2_Click(object sender, EventArgs e)
+        {
+            String text = messageTextBox2.Text;
+            serialPort2.Write(text);
+            logTextBox2.AppendText("Write : " + text + "\n");
+            //Console.WriteLine(text);
+            // messageTextBoxをクリア
+            messageTextBox2.Text = "";
+
+        }
     }
 }
